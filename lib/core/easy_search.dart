@@ -9,11 +9,11 @@ import 'search_screen_list.dart';
 
 class EasySearch<T> extends StatefulWidget {
   const EasySearch({
-    Key key,
-    SearchResultSettings searchResultSettings,
-    FilterPageSettings filterPageSettings,
-    bool multipleSelect,
-    bool startWithValue,
+    Key? key,
+    SearchResultSettings? searchResultSettings,
+    FilterPageSettings? filterPageSettings,
+    bool? multipleSelect,
+    bool? startWithValue,
     this.controller,
     this.onSearch,
     this.onChange,
@@ -108,7 +108,7 @@ class EasySearch<T> extends StatefulWidget {
   ///
   /// results list, quantity of selected items
   ///
-  final SearchItem controller;
+  final SearchItem? controller;
 
   ///
   /// Parameter name: [onSearch]
@@ -117,7 +117,7 @@ class EasySearch<T> extends StatefulWidget {
   ///
   /// when making a call to a web server
   ///
-  final OnSearch<T> onSearch;
+  final OnSearch<T>? onSearch;
 
   ///
   /// Parameter name: [onChange]
@@ -126,7 +126,7 @@ class EasySearch<T> extends StatefulWidget {
   ///
   /// when item list is changed
   ///
-  final OnChange<T> onChange;
+  final OnChange<T>? onChange;
 
   ///
   /// Parameter name: [customItemBuilder]
@@ -139,18 +139,18 @@ class EasySearch<T> extends StatefulWidget {
   ///
   /// how your filter list will present the items
   ///
-  final CustomItemBuilder<T> customItemBuilder;
+  final CustomItemBuilder<T>? customItemBuilder;
 
   @override
   _EasySearchState<T> createState() =>
       _EasySearchState<T>(controller: controller);
 }
 
-class _EasySearchState<T> extends State<EasySearch<T>> {
-  SearchItem _controller;
-  double _borderWidth;
+class _EasySearchState<T> extends State<EasySearch<T?>> {
+  SearchItem? _controller;
+  double? _borderWidth;
   SearchItem _oldController = SearchItem(items: []);
-  _EasySearchState({SearchItem controller}) {
+  _EasySearchState({SearchItem? controller}) {
     _controller = controller ?? SearchItem(items: []);
     _borderWidth = 0.0;
   }
@@ -172,7 +172,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
     }
   }
 
-  Widget _label(LabelSettings settings, [String defaultValue = ""]) {
+  Widget? _label(LabelSettings? settings, [String defaultValue = ""]) {
     return settings != null
         ? Text(
             settings.value ?? defaultValue,
@@ -180,7 +180,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
               fontSize: settings.fontSize,
               fontWeight: settings.fontWeight,
               letterSpacing: settings.letterSpacing,
-              color: settings.color.withOpacity(settings.colorOpacity),
+              color: settings.color!.withOpacity(settings.colorOpacity),
             ),
           )
         : null;
@@ -188,18 +188,18 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
 
   @override
   Widget build(BuildContext context) {
-    Text textLabel;
-    Text textLabelHide;
+    Text? textLabel;
+    Text? textLabelHide;
 
     if (widget.searchResultSettings?.label != null) {
-      textLabel = _label(widget.searchResultSettings.label);
+      textLabel = _label(widget.searchResultSettings.label) as Text?;
 
       textLabelHide = Text(
-        widget.searchResultSettings.label.value,
+        widget.searchResultSettings.label!.value,
         style: TextStyle(
-          fontSize: widget.searchResultSettings.label.fontSize,
-          fontWeight: widget.searchResultSettings.label.fontWeight,
-          letterSpacing: widget.searchResultSettings.label.letterSpacing,
+          fontSize: widget.searchResultSettings.label!.fontSize,
+          fontWeight: widget.searchResultSettings.label!.fontWeight,
+          letterSpacing: widget.searchResultSettings.label!.letterSpacing,
           color: Colors.transparent,
         ),
       );
@@ -221,7 +221,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                   border: Border.all(
                       color: widget
                           .searchResultSettings.styleSearchPage.borderColor,
-                      width: _borderWidth),
+                      width: _borderWidth!),
                   color: widget
                       .searchResultSettings.styleSearchPage.backGroundColor
                       .withOpacity(widget.searchResultSettings.styleSearchPage
@@ -237,9 +237,9 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                 child: InkWell(
                   onTap: () async {
                     if ((_controller == null ||
-                            _controller.listItems == null ||
-                            _controller.listItems.getListItems == null ||
-                            _controller.listItems.getListItems.length == 0) &&
+                            _controller!.listItems == null ||
+                            _controller!.listItems.getListItems == null ||
+                            _controller!.listItems.getListItems.length == 0) &&
                         widget.onSearch == null) {
                       final snackBar = SnackBar(
                         content: Text(
@@ -252,7 +252,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
 
                       Scaffold.of(context).showSnackBar(snackBar);
                     } else {
-                      _controller.filter = '';
+                      _controller!.filter = '';
                       final result = await Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -267,27 +267,27 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                       );
 
                       if (result != null) {
-                        _controller.listItems.updateList();
+                        _controller!.listItems.updateList();
                         var itemsTemp = (result as SearchItem);
                         if (itemsTemp == null ||
                             itemsTemp.listItems == null ||
                             itemsTemp.listItems.getListItems.length == 0) {
                           print('No items were selected');
-                          _controller.clear();
+                          _controller!.clear();
                         } else {
                           //Check items selected == true;
 
                           var selectedList = itemsTemp
                               .getSelectedItems.getListItems
-                              .where((element) => element.selected)
+                              .where((element) => element!.selected)
                               .toList();
 
                           if (_controller != null &&
-                              _controller.getSelectedItems.getListItems.length >
+                              _controller!.getSelectedItems.getListItems.length >
                                   0) {
                             for (var itemSelected in selectedList) {
                               print(
-                                  'Item: ${itemSelected.item}  -  Selected: ${itemSelected.selected}');
+                                  'Item: ${itemSelected!.item}  -  Selected: ${itemSelected.selected}');
                             }
                           }
                         }
@@ -315,7 +315,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                           child: ValueListenableBuilder(
                             valueListenable: _controller?.listItems,
-                            builder: (_, __, ___) {
+                            builder: (_, dynamic __, ___) {
                               return this._controller?.hasSelection == true
                                   ? Wrap(
                                       spacing: widget
@@ -324,7 +324,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                                           .spacingBetweenItemsValue,
                                       children: buildTextItem(
                                         context: context,
-                                        searchItem: _controller,
+                                        searchItem: _controller!,
                                       ),
                                     )
                                   : _label(
@@ -382,26 +382,26 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
       return;
     }
 
-    List<T> onChangeValues;
+    List<T?>? onChangeValues;
     if (_controller != null &&
-        _controller.getSelectedItems != null &&
-        _controller.getSelectedItems.getListItems.length > 0) {
-      var selectedList = _controller.getSelectedItems.getListItems
-          .where((element) => element.selected)
+        _controller!.getSelectedItems != null &&
+        _controller!.getSelectedItems.getListItems.length > 0) {
+      var selectedList = _controller!.getSelectedItems.getListItems
+          .where((element) => element!.selected)
           .toList();
 
       onChangeValues = [];
       selectedList.forEach(
         (element) {
-          onChangeValues.add(element.item);
+          onChangeValues!.add(element!.item);
         },
       );
     }
 
-    widget.onChange(onChangeValues);
+    widget.onChange!(onChangeValues);
   }
 
-  List<Widget> buildTextItem({BuildContext context, SearchItem searchItem}) {
+  List<Widget> buildTextItem({BuildContext? context, required SearchItem searchItem}) {
     List<Widget> listWidget = [];
     for (var element in searchItem.getSelectedItems.getListItems) {
       listWidget.add(
@@ -410,13 +410,13 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
               widget.searchResultSettings.buildItemResult.highlightColor,
           splashColor:
               widget.searchResultSettings.buildItemResult.splashColor ??
-                  Theme.of(context).primaryColor,
+                  Theme.of(context!).primaryColor,
           borderRadius: BorderRadius.circular(widget.searchResultSettings
               .buildItemResult.circularBackgroundBorderRadius),
           onTap: () {
-            print('The item - ${element.item.toString()} has been removed');
+            print('The item - ${element!.item.toString()} has been removed');
             element.selected = false;
-            _controller.listItems.updateList();
+            _controller!.listItems.updateList();
             //_controller.selectedItems.removeItem(element);
 
             //Call OnChange Method
@@ -442,7 +442,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                       .searchResultSettings.buildItemResult.spacingBetweenItem,
                   children: [
                     Text(
-                      element.item.toString(),
+                      element!.item.toString(),
                       style: TextStyle(
                         fontSize: widget.searchResultSettings.buildItemResult
                             .itemValue.fontSize,
@@ -451,7 +451,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                         letterSpacing: widget.searchResultSettings
                             .buildItemResult.itemValue.letterSpacing,
                         color: widget.searchResultSettings.buildItemResult
-                            .itemValue.color
+                            .itemValue.color!
                             .withOpacity(widget.searchResultSettings
                                 .buildItemResult.itemValue.colorOpacity),
                       ),
@@ -482,7 +482,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                                   .removeItemIconColor
                                   .withOpacity(widget.searchResultSettings
                                       .buildItemResult.removeItemIconOpacity)
-                              : Theme.of(context).primaryColor !=
+                              : Theme.of(context!).primaryColor !=
                                       widget.searchResultSettings
                                           .buildItemResult.backgroundColor
                                   ? Theme.of(context).primaryColor.withOpacity(
@@ -506,31 +506,31 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
   //Clone Controller to return the data when the user cancels
   void cloneController() {
     _oldController = SearchItem(items: []);
-    _oldController.filterValue.value = _controller.filterValue.value;
-    _oldController.itemValue = _controller.itemValue;
-    _oldController.listItems = _controller.listItems;
+    _oldController.filterValue.value = _controller!.filterValue.value;
+    _oldController.itemValue = _controller!.itemValue;
+    _oldController.listItems = _controller!.listItems;
     _oldController.getSelectedItems;
   }
 
   //Back Clone Controller Values
   void backCloneControllerValues() {
     var listTemp = List<Item>();
-    _controller.filterValue.value = _oldController.filterValue.value;
-    _controller.itemValue = _oldController.itemValue;
+    _controller!.filterValue.value = _oldController.filterValue.value;
+    _controller!.itemValue = _oldController.itemValue;
 
     _oldController.listItems?.getListItems?.forEach(
       (element) => listTemp.add(
-        Item(element.itemValue.value, element.selectedValue.value),
+        Item(element!.itemValue!.value, element.selectedValue.value),
       ),
     );
 
-    _controller.listItems?.listItems?.value?.clear();
+    _controller!.listItems?.listItems?.value?.clear();
 
     listTemp?.forEach(
-      (element) => _controller.listItems.listItems.value.add(
-        Item(element.itemValue.value, element.selectedValue.value),
+      (element) => _controller!.listItems.listItems.value.add(
+        Item(element.itemValue!.value, element.selectedValue.value),
       ),
     );
-    _controller.getSelectedItems;
+    _controller!.getSelectedItems;
   }
 }

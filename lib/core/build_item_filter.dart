@@ -7,9 +7,9 @@ class BuildItemFilter {
   final EdgeInsets padding;
   final double circularBorderRadiusItem;
   final EdgeInsets spaceBetweenItems;
-  final Color backgroundSelectedItem;
+  final Color? backgroundSelectedItem;
   final double backgroundSelectedItemOpacity;
-  final Color borderSelectedItem;
+  final Color? borderSelectedItem;
   final double borderSelectedItemOpacity;
   final double circularBorderRadiusBackgroundItem;
   final EdgeInsets backgroundValuePadding;
@@ -23,23 +23,23 @@ class BuildItemFilter {
   final Icon iconAnimation;
 
   const BuildItemFilter({
-    EdgeInsets padding,
-    double circularBorderRadiusItem,
-    EdgeInsets spaceBetweenItems,
-    Color backgroundSelectedItem,
-    double backgroundSelectedItemOpacity,
-    Color borderSelectedItem,
-    double borderSelectedItemOpacity,
-    double circularBorderRadiusBackgroundItem,
-    EdgeInsets backgroundValuePadding,
-    EdgeInsets valuePadding,
-    LabelSettings itemValue,
-    CrossAxisAlignment crossAxisAlignment,
-    bool hasAnimationOnSelectItem,
-    double increaseHeightWhenAnimating,
-    int animationDurationMilliseconds,
-    CurvesType curves,
-    Icon iconAnimation,
+    EdgeInsets? padding,
+    double? circularBorderRadiusItem,
+    EdgeInsets? spaceBetweenItems,
+    Color? backgroundSelectedItem,
+    double? backgroundSelectedItemOpacity,
+    Color? borderSelectedItem,
+    double? borderSelectedItemOpacity,
+    double? circularBorderRadiusBackgroundItem,
+    EdgeInsets? backgroundValuePadding,
+    EdgeInsets? valuePadding,
+    LabelSettings? itemValue,
+    CrossAxisAlignment? crossAxisAlignment,
+    bool? hasAnimationOnSelectItem,
+    double? increaseHeightWhenAnimating,
+    int? animationDurationMilliseconds,
+    CurvesType? curves,
+    Icon? iconAnimation,
   })  : this.padding = padding != null
             ? padding
             : const EdgeInsets.only(

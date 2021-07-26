@@ -5,20 +5,20 @@ import 'label_settings.dart';
 class FilterActionButton {
   final Color background;
   final double backgroundOpacity;
-  final Color border;
+  final Color? border;
   final double borderOpacity;
   final double borderRadius;
-  final LabelSettings textValue;
+  final LabelSettings? textValue;
   final Icon icon;
 
   const FilterActionButton({
-    Color background,
-    double backgroundOpacity,
-    Color border,
-    double borderOpacity,
-    double borderRadius,
-    LabelSettings textValue,
-    Icon icon,
+    Color? background,
+    double? backgroundOpacity,
+    Color? border,
+    double? borderOpacity,
+    double? borderRadius,
+    LabelSettings? textValue,
+    Icon? icon,
   })  : this.background = background != null ? background : Colors.white,
         this.backgroundOpacity = backgroundOpacity != null &&
                 backgroundOpacity >= 0.0 &&
@@ -40,12 +40,12 @@ class FilterActionButton {
             : const Icon(Icons.check, color: null, size: 25);
 
   const FilterActionButton.unselectedAll({
-    Color background,
-    double backgroundOpacity,
-    Color border,
-    double borderOpacity,
-    double borderRadius,
-    Icon icon,
+    Color? background,
+    double? backgroundOpacity,
+    Color? border,
+    double? borderOpacity,
+    double? borderRadius,
+    Icon? icon,
   })  : this.background = background != null ? background : Colors.red,
         this.backgroundOpacity = backgroundOpacity != null &&
                 backgroundOpacity >= 0.0 &&
@@ -65,12 +65,12 @@ class FilterActionButton {
             : const Icon(Icons.clear_all, color: Colors.white, size: 25);
 
   const FilterActionButton.selectedAll({
-    Color background,
-    double backgroundOpacity,
-    Color border,
-    double borderOpacity,
-    double borderRadius,
-    Icon icon,
+    Color? background,
+    double? backgroundOpacity,
+    Color? border,
+    double? borderOpacity,
+    double? borderRadius,
+    Icon? icon,
   })  : this.background = background != null ? background : Colors.green,
         this.backgroundOpacity = backgroundOpacity != null &&
                 backgroundOpacity >= 0.0 &&

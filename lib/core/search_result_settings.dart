@@ -5,10 +5,10 @@ import 'label_settings.dart';
 import 'style_search_page.dart';
 
 class SearchResultSettings {
-  final LabelSettings label;
-  final LabelSettings labelHint;
-  final Widget prefix;
-  final Widget sufix;
+  final LabelSettings? label;
+  final LabelSettings? labelHint;
+  final Widget? prefix;
+  final Widget? sufix;
   final EdgeInsets padding;
   final StyleSearchPage styleSearchPage;
   final BuildItemResult buildItemResult;
@@ -18,9 +18,9 @@ class SearchResultSettings {
     this.labelHint,
     this.prefix,
     this.sufix,
-    EdgeInsets padding,
-    StyleSearchPage styleSearchPage,
-    BuildItemResult buildItemResult,
+    EdgeInsets? padding,
+    StyleSearchPage? styleSearchPage,
+    BuildItemResult? buildItemResult,
   })  : this.padding = padding != null ? padding : const EdgeInsets.all(0.0),
         this.styleSearchPage =
             styleSearchPage != null ? styleSearchPage : const StyleSearchPage(),

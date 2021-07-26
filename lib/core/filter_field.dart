@@ -6,7 +6,7 @@ import 'label_settings.dart';
 class FilterField {
   final Icon prefixIcon;
   final Icon suffixIcon;
-  final Color cursor;
+  final Color? cursor;
   final Color suffixIconBackground;
   final double suffixIconBackgroundOpacity;
   final EdgeInsets sufixCircularPadding;
@@ -18,18 +18,18 @@ class FilterField {
   final LabelSettings labelCancelFilterSearch;
 
   const FilterField({
-    Icon prefixIcon,
-    Icon suffixIcon,
-    Color cursor,
-    Color suffixIconBackground,
-    double suffixIconBackgroundOpacity,
-    EdgeInsets sufixCircularPadding,
-    EdgeInsets sufixIconCircularPadding,
-    bool showHint,
-    LabelSettings labelHint,
-    LabelSettings styleSearchValue,
-    LabelSettings labelCancelFilterSearch,
-    DividerFilterAndList dividerFilterAndList,
+    Icon? prefixIcon,
+    Icon? suffixIcon,
+    Color? cursor,
+    Color? suffixIconBackground,
+    double? suffixIconBackgroundOpacity,
+    EdgeInsets? sufixCircularPadding,
+    EdgeInsets? sufixIconCircularPadding,
+    bool? showHint,
+    LabelSettings? labelHint,
+    LabelSettings? styleSearchValue,
+    LabelSettings? labelCancelFilterSearch,
+    DividerFilterAndList? dividerFilterAndList,
   })  : this.prefixIcon = prefixIcon != null
             ? prefixIcon
             : const Icon(Icons.search, color: Colors.grey, size: 22),

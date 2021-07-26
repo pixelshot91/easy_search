@@ -11,13 +11,13 @@ class StyleSearchPage {
   final double paddingRightSearchIcon;
 
   const StyleSearchPage({
-    Color borderColor,
-    Color backGroundColor,
-    double backgroundColorOpacity,
-    double borderRadiusCircular,
-    double spacingBetweenItemsValue,
-    double paddingLeftSearchIcon,
-    double paddingRightSearchIcon,
+    Color? borderColor,
+    Color? backGroundColor,
+    double? backgroundColorOpacity,
+    double? borderRadiusCircular,
+    double? spacingBetweenItemsValue,
+    double? paddingLeftSearchIcon,
+    double? paddingRightSearchIcon,
   })  : this.borderColor = borderColor != null ? borderColor : Colors.grey,
         //this.borderWidth = 0.0,
         this.backGroundColor =

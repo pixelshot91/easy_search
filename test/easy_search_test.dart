@@ -8,10 +8,10 @@ void main() {
 
   test('Controller is not null', () {
     expect(easySearch.controller != null, true);
-    expect(easySearch.controller.countSelected, 0);
+    expect(easySearch.controller!.countSelected, 0);
   });
   test('CountSelected == 0', () {
-    expect(easySearch.controller.countSelected, 0);
+    expect(easySearch.controller!.countSelected, 0);
   });
 
   test('SearchResultSettings is not null', () {

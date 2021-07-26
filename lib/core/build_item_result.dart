@@ -4,7 +4,7 @@ import 'label_settings.dart';
 
 class BuildItemResult {
   final Color highlightColor;
-  final Color splashColor;
+  final Color? splashColor;
   final double circularBackgroundBorderRadius;
   final EdgeInsets backgroundPadding;
   final Color backgroundColor;
@@ -20,21 +20,21 @@ class BuildItemResult {
   final double removeItemIconBackgroundOpacity;
 
   const BuildItemResult({
-    Color highlightColor,
-    Color splashColor,
-    double circularBackgroundBorderRadius,
-    EdgeInsets backgroundPadding,
-    Color backgroundColor,
-    double backgroundOpacity,
-    double circularBorderRadiusItem,
-    EdgeInsets itemPadding,
-    double spacingBetweenItem,
-    LabelSettings itemValue,
-    IconData removeItemIcon,
-    Color removeItemIconColor,
-    double removeItemIconOpacity,
-    Color removeItemIconBackgroundColor,
-    double removeItemIconBackgroundOpacity,
+    Color? highlightColor,
+    Color? splashColor,
+    double? circularBackgroundBorderRadius,
+    EdgeInsets? backgroundPadding,
+    Color? backgroundColor,
+    double? backgroundOpacity,
+    double? circularBorderRadiusItem,
+    EdgeInsets? itemPadding,
+    double? spacingBetweenItem,
+    LabelSettings? itemValue,
+    IconData? removeItemIcon,
+    Color? removeItemIconColor,
+    double? removeItemIconOpacity,
+    Color? removeItemIconBackgroundColor,
+    double? removeItemIconBackgroundOpacity,
   })  : this.highlightColor =
             highlightColor != null ? highlightColor : Colors.red,
         this.splashColor = splashColor != null ? splashColor : null,

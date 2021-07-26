@@ -22,9 +22,9 @@ class Item<T> {
         selectionHasBeenModified ?? false;
   }
 
-  ValueNotifier<T> itemValue;
-  T get item => itemValue?.value ?? null;
-  set item(T item) {
+  ValueNotifier<T>? itemValue;
+  T? get item => itemValue?.value ?? null;
+  set item(T? item) {
     if (item == null) {
       throw ('Item cannot be null');
     }
@@ -32,7 +32,7 @@ class Item<T> {
     if (this.itemValue == null) {
       this.itemValue = ValueNotifier<T>(item);
     } else {
-      this.itemValue.value = item;
+      this.itemValue!.value = item;
     }
   }
 

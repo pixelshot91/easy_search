@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'item.dart';
 
 class SearchItemList<T> extends ValueNotifier {
-  SearchItemList({List<T> items}) : super(items) {
+  SearchItemList({List<T>? items}) : super(items) {
     if (items != null && items.length > 0) {
       items.forEach((element) {
         setListItem((element as Item));
@@ -11,8 +11,8 @@ class SearchItemList<T> extends ValueNotifier {
     }
   }
 
-  ValueNotifier<List<Item>> listItems = ValueNotifier<List<Item>>([]);
-  List<Item> get getListItems => listItems?.value ?? null;
+  ValueNotifier<List<Item?>> listItems = ValueNotifier<List<Item>>([]);
+  List<Item?> get getListItems => listItems?.value ?? null;
   setListItem(Item item) {
     if (item == null) {
       return throw ('Search Item cannot be null or empty');
@@ -33,15 +33,15 @@ class SearchItemList<T> extends ValueNotifier {
     updateList();
   }
 
-  fillItemsList({List<T> items, bool fillSelected = false}) {
+  fillItemsList({List<T>? items, bool fillSelected = false}) {
     if (items == null) {
       return throw ('Search Items List cannot be null');
     }
 
-    ValueNotifier<List<Item>> listTemp = ValueNotifier<List<Item>>([]);
+    ValueNotifier<List<Item?>> listTemp = ValueNotifier<List<Item?>>([]);
     items.forEach(
       (element) => listTemp.value.add(
-        fillSelected ? element : Item(element, false),
+        fillSelected ? element as Item<dynamic>? : Item(element, false),
       ),
     );
     this.listItems = listTemp;
@@ -49,7 +49,7 @@ class SearchItemList<T> extends ValueNotifier {
     updateList();
   }
 
-  fillSelectedOldItemsFromCancel({List<T> items}) {
+  fillSelectedOldItemsFromCancel({List<T>? items}) {
     if (items == null) {
       return throw ('Search Items List cannot be null');
     }
@@ -67,7 +67,7 @@ class SearchItemList<T> extends ValueNotifier {
 
   justOneSelected(Item item) {
     getListItems.forEach((element) =>
-        element != item ? element.selected = false : element.selected = true);
+        element != item ? element!.selected = false : element!.selected = true);
     updateList();
   }
 
@@ -76,13 +76,13 @@ class SearchItemList<T> extends ValueNotifier {
   ///
   ///[all == false] all items are unselected
   ///
-  selectOrUselecteAll({bool all = true, bool multipleSelect = false}) {
+  selectOrUselecteAll({bool all = true, bool? multipleSelect = false}) {
     getListItems.forEach(
       (element) {
-        if (multipleSelect) {
+        if (multipleSelect!) {
           //Select All == True
           if (all) {
-            if ((element.selectionHasBeenModified && element.selected) ||
+            if ((element!.selectionHasBeenModified && element.selected) ||
                 (!element.selectionHasBeenModified && !element.selected)) {
               element.selectionHasBeenModified = true;
             } else if ((!element.selectionHasBeenModified &&
@@ -94,7 +94,7 @@ class SearchItemList<T> extends ValueNotifier {
             element.selected = true;
           } else if (!all) {
             //Select All == false
-            if ((element.selectionHasBeenModified && element.selected) ||
+            if ((element!.selectionHasBeenModified && element.selected) ||
                 (!element.selectionHasBeenModified && !element.selected)) {
               element.selectionHasBeenModified = false;
             } else if ((!element.selectionHasBeenModified &&
@@ -144,7 +144,7 @@ class SearchItemList<T> extends ValueNotifier {
     }
     return getListItems.length == 0
         ? 0
-        : getListItems.where((element) => element.selected).toList().length;
+        : getListItems.where((element) => element!.selected).toList().length;
   }
 
   clear() {

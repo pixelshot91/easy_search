@@ -95,7 +95,7 @@ class FilterPageSettings {
   ///
   /// Default value: false
   ///
-  final bool searchOnShow;
+  final bool? searchOnShow;
 
   ///
   /// Parameter name: [searchOnEmpty]
@@ -110,7 +110,7 @@ class FilterPageSettings {
   ///
   /// Default value: false
   ///
-  final bool searchOnEmpty;
+  final bool? searchOnEmpty;
 
   ///
   /// Parameter name: [waitingTimeToSearch]
@@ -125,18 +125,18 @@ class FilterPageSettings {
   ///
   /// Default value: Duration(milliseconds: 1500)
   ///
-  final int waitingTimeToSearch;
+  final int? waitingTimeToSearch;
 
   const FilterPageSettings(
-      {LabelSettings title,
-      bool showBackButton,
-      EdgeInsets padding,
-      FilterField filterField,
-      ListFilter listFilter,
-      BuildItemFilter buildItemFilter,
-      FilterActionButton selectedButton,
-      FilterActionButton selectedAll,
-      FilterActionButton unselectedAll,
+      {LabelSettings? title,
+      bool? showBackButton,
+      EdgeInsets? padding,
+      FilterField? filterField,
+      ListFilter? listFilter,
+      BuildItemFilter? buildItemFilter,
+      FilterActionButton? selectedButton,
+      FilterActionButton? selectedAll,
+      FilterActionButton? unselectedAll,
       this.searchOnShow,
       this.searchOnEmpty,
       this.waitingTimeToSearch})

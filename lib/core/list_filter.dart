@@ -4,11 +4,11 @@ import 'label_settings.dart';
 
 class ListFilter {
   final LabelSettings valueNotFoundAlert;
-  final Color circularProgress;
+  final Color? circularProgress;
 
   const ListFilter({
-    LabelSettings valueNotFoundAlert,
-    Color circularProgress,
+    LabelSettings? valueNotFoundAlert,
+    Color? circularProgress,
   })  : this.valueNotFoundAlert = valueNotFoundAlert != null
             ? valueNotFoundAlert
             : const LabelSettings.filterPageNotFoundMessageAlert(),
