@@ -13,8 +13,4 @@ void main() {
   test('CountSelected == 0', () {
     expect(easySearch.controller!.countSelected, 0);
   });
-
-  test('SearchResultSettings is not null', () {
-    expect(easySearch.searchResultSettings != null, true);
-  });
 }

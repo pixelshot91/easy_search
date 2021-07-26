@@ -266,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
               controller: controllerStartWithValue,
             ),
             Center(
-              child: RaisedButton(
+              child: TextButton(
                 onPressed: () {
                   //1ª Create the new listToFill
                   List<Item<ModelExample>> listToFill = [

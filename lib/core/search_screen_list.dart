@@ -137,7 +137,6 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
                     return (_loading)
                         ? buildProgress(context)
                         : (widget.controller == null ||
-                                widget.controller!.listItems == null ||
                                 widget.controller!.listItems.getListItems == null ||
                                 widget.controller!.listItems.getListItems!.length == 0)
                             ? buildMessageNotFound(context)
@@ -237,7 +236,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
             fontWeight: widget.filterPageSettings!.filterField.labelHint.fontWeight),
         hintText: widget.filterPageSettings!.filterField.labelHint.value,
         prefixIcon: widget.filterPageSettings!.filterField.prefixIcon,
-        suffixIcon: widget.controller != null && widget.controller!.filterValue != null
+        suffixIcon: widget.controller != null
             ? ValueListenableBuilder(
                 valueListenable: widget.controller!.filterValue,
                 builder: (_, dynamic __, ___) {
@@ -292,10 +291,9 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
 
   //Build FlatButton Cancel
   Widget buildFlatButtonCancel(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       child: Text(
-        widget.filterPageSettings!.filterField.labelCancelFilterSearch.value == null ||
-                widget.filterPageSettings!.filterField.labelCancelFilterSearch.value.replaceAll(' ', '').length == 0
+        widget.filterPageSettings!.filterField.labelCancelFilterSearch.value.replaceAll(' ', '').length == 0
             ? 'Cancel'
             : widget.filterPageSettings!.filterField.labelCancelFilterSearch.value,
         style: TextStyle(
@@ -309,7 +307,6 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
           fontSize: widget.filterPageSettings!.filterField.labelCancelFilterSearch.fontSize,
         ),
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       onPressed: () {
         _pop(context: context, cancel: true);
         // _pop(context: context);
@@ -532,22 +529,16 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                widget.filterPageSettings!.unselectedAll.icon != null
-                    ? Icon(
-                        widget.filterPageSettings!.unselectedAll.icon.icon != null
-                            ? widget.filterPageSettings!.unselectedAll.icon.icon
-                            : Icons.clear_all,
-                        color: widget.filterPageSettings!.unselectedAll.icon.color != null
-                            ? widget.filterPageSettings!.unselectedAll.icon.color
-                            : Colors.white,
-                        size: widget.filterPageSettings!.unselectedAll.icon.size != null
-                            ? widget.filterPageSettings!.unselectedAll.icon.size
-                            : 25)
-                    : Icon(
-                        Icons.clear_all,
-                        color: Colors.white,
-                        size: 25,
-                      ),
+                Icon(
+                    widget.filterPageSettings!.unselectedAll.icon.icon != null
+                        ? widget.filterPageSettings!.unselectedAll.icon.icon
+                        : Icons.clear_all,
+                    color: widget.filterPageSettings!.unselectedAll.icon.color != null
+                        ? widget.filterPageSettings!.unselectedAll.icon.color
+                        : Colors.white,
+                    size: widget.filterPageSettings!.unselectedAll.icon.size != null
+                        ? widget.filterPageSettings!.unselectedAll.icon.size
+                        : 25),
               ],
             ),
           ),
@@ -593,22 +584,16 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                widget.filterPageSettings!.selectedAll.icon != null
-                    ? Icon(
-                        widget.filterPageSettings!.selectedAll.icon.icon != null
-                            ? widget.filterPageSettings!.selectedAll.icon.icon
-                            : Icons.done_all,
-                        color: widget.filterPageSettings!.selectedAll.icon.color != null
-                            ? widget.filterPageSettings!.selectedAll.icon.color
-                            : Colors.white,
-                        size: widget.filterPageSettings!.selectedAll.icon.size != null
-                            ? widget.filterPageSettings!.selectedAll.icon.size
-                            : 25)
-                    : Icon(
-                        Icons.done_all,
-                        color: Colors.white,
-                        size: 25,
-                      ),
+                Icon(
+                    widget.filterPageSettings!.selectedAll.icon.icon != null
+                        ? widget.filterPageSettings!.selectedAll.icon.icon
+                        : Icons.done_all,
+                    color: widget.filterPageSettings!.selectedAll.icon.color != null
+                        ? widget.filterPageSettings!.selectedAll.icon.color
+                        : Colors.white,
+                    size: widget.filterPageSettings!.selectedAll.icon.size != null
+                        ? widget.filterPageSettings!.selectedAll.icon.size
+                        : 25),
               ],
             ),
           ),
@@ -665,7 +650,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0, top: 5.0), //Text Selected Button Padding
                         child: Text(
-                          '${widget.controller!.countSelected} ${widget.filterPageSettings!.selectedButton.textValue!.value != null ? widget.filterPageSettings!.selectedButton.textValue!.value : widget.controller!.countSelected > 1 ? 'items' : 'item'}',
+                          '${widget.controller!.countSelected} ${widget.filterPageSettings!.selectedButton.textValue!.value}',
                           textAlign: widget.filterPageSettings!.selectedButton.textValue!.textAlign,
                           style: TextStyle(
                             color: widget.filterPageSettings!.selectedButton.textValue!.color != null
@@ -683,24 +668,18 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
                       Padding(
                         //Icon Selected Button Padding
                         padding: const EdgeInsets.only(left: 0.0, top: 0.0, right: 5.0, bottom: 0.0),
-                        child: widget.filterPageSettings!.selectedButton.icon != null
-                            ? Icon(
-                                widget.filterPageSettings!.selectedButton.icon.icon != null
-                                    ? widget.filterPageSettings!.selectedButton.icon.icon
-                                    : Icons.check,
-                                size: widget.filterPageSettings!.selectedButton.icon.size != null &&
-                                        widget.filterPageSettings!.selectedButton.icon.size! > 0
-                                    ? widget.filterPageSettings!.selectedButton.icon.size
-                                    : 25,
-                                color: widget.filterPageSettings!.selectedButton.icon.color != null
-                                    ? widget.filterPageSettings!.selectedButton.icon.color
-                                    : Theme.of(context).primaryColor,
-                              )
-                            : Icon(
-                                Icons.check,
-                                size: 25,
-                                color: Theme.of(context).primaryColor,
-                              ),
+                        child: Icon(
+                          widget.filterPageSettings!.selectedButton.icon.icon != null
+                              ? widget.filterPageSettings!.selectedButton.icon.icon
+                              : Icons.check,
+                          size: widget.filterPageSettings!.selectedButton.icon.size != null &&
+                                  widget.filterPageSettings!.selectedButton.icon.size! > 0
+                              ? widget.filterPageSettings!.selectedButton.icon.size
+                              : 25,
+                          color: widget.filterPageSettings!.selectedButton.icon.color != null
+                              ? widget.filterPageSettings!.selectedButton.icon.color
+                              : Theme.of(context).primaryColor,
+                        ),
                       )
                     ],
                   ),
@@ -718,127 +697,86 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
     switch (curvesType) {
       case CurvesType.bounceIn:
         return Curves.bounceIn;
-        break;
       case CurvesType.bounceInOut:
         return Curves.bounceInOut;
-        break;
       case CurvesType.bounceOut:
         return Curves.bounceOut;
-        break;
       case CurvesType.decelerate:
         return Curves.decelerate;
-        break;
       case CurvesType.ease:
         return Curves.ease;
-        break;
       case CurvesType.easeIn:
         return Curves.easeIn;
-        break;
       case CurvesType.easeInBack:
         return Curves.easeInBack;
-        break;
       case CurvesType.easeInCirc:
         return Curves.easeInCirc;
-        break;
       case CurvesType.easeInCubic:
         return Curves.easeInCubic;
-        break;
       case CurvesType.easeInExpo:
         return Curves.easeInExpo;
-        break;
       case CurvesType.easeInOut:
         return Curves.easeInOut;
-        break;
       case CurvesType.easeInOutBack:
         return Curves.easeInOutBack;
-        break;
       case CurvesType.easeInOutCirc:
         return Curves.easeInOutCirc;
-        break;
       case CurvesType.easeInOutCubic:
         return Curves.easeInOutCubic;
-        break;
       case CurvesType.easeInOutExpo:
         return Curves.easeInOutExpo;
-        break;
       case CurvesType.easeInOutQuad:
         return Curves.easeInOutQuad;
-        break;
       case CurvesType.easeInOutQuart:
         return Curves.easeInOutQuart;
-        break;
       case CurvesType.easeInOutQuint:
         return Curves.easeInOutQuint;
-        break;
       case CurvesType.easeInOutSine:
         return Curves.easeInOutSine;
-        break;
       case CurvesType.easeInQuad:
         return Curves.easeInQuad;
-        break;
       case CurvesType.easeInQuart:
         return Curves.easeInQuart;
-        break;
       case CurvesType.easeInQuint:
         return Curves.easeInQuint;
-        break;
       case CurvesType.easeInSine:
         return Curves.easeInSine;
-        break;
       case CurvesType.easeInToLinear:
         return Curves.easeInToLinear;
-        break;
       case CurvesType.easeOut:
         return Curves.easeOut;
-        break;
       case CurvesType.easeOutBack:
         return Curves.easeOutBack;
-        break;
       case CurvesType.easeOutCirc:
         return Curves.easeOutCirc;
-        break;
       case CurvesType.easeOutCubic:
         return Curves.easeOutCubic;
-        break;
       case CurvesType.easeOutExpo:
         return Curves.easeOutExpo;
-        break;
       case CurvesType.easeOutQuad:
         return Curves.easeOutQuad;
-        break;
       case CurvesType.easeOutQuart:
         return Curves.easeOutQuart;
-        break;
       case CurvesType.easeOutQuint:
         return Curves.easeOutQuint;
-        break;
       case CurvesType.easeOutSine:
         return Curves.easeOutSine;
-        break;
       case CurvesType.elasticIn:
         return Curves.elasticIn;
-        break;
       case CurvesType.elasticInOut:
         return Curves.elasticInOut;
-        break;
       case CurvesType.elasticOut:
         return Curves.elasticOut;
-        break;
       case CurvesType.fastLinearToSlowEaseIn:
         return Curves.fastLinearToSlowEaseIn;
-        break;
       case CurvesType.fastOutSlowIn:
         return Curves.fastOutSlowIn;
-        break;
       case CurvesType.linear:
         return Curves.linear;
-        break;
       case CurvesType.linearToEaseOut:
         return Curves.linearToEaseOut;
-        break;
       case CurvesType.slowMiddle:
         return Curves.slowMiddle;
-        break;
       default:
         return Curves.fastOutSlowIn;
     }
@@ -910,8 +848,8 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
         ? ValueNotifier<Item>(Item(controller.itemValue!.value!.item, controller.itemValue!.value!.selected))
         : ValueNotifier<Item?>(null);
 
-    controller.listItems?.getListItems?.forEach(
-      (element) => _oldController.listItems?.listItems?.value?.add(element),
+    controller.listItems.getListItems?.forEach(
+      (element) => _oldController.listItems.listItems.value.add(element),
       // _oldController.listItems.setListItem(Item(element.itemValue.value, element.selectedValue.value),),
     );
   }
@@ -967,7 +905,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
         List<T?> result = await widget.onSearch!(widget.controller!.filter);
 
         _loading = false;
-        if (result != null && _enableSearch) {
+        if (_enableSearch) {
           widget.controller!.listItems.fillItemsList(items: result);
         }
       }
@@ -1011,7 +949,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerPr
         (element) => oldItemList.add(element!.item),
       );
 
-      if (oldItemList != null && oldItemList.length > 0) {
+      if (oldItemList.length > 0) {
         widget.controller!.listItems.fillSelectedOldItemsFromCancel(items: oldItemList);
       }
     }

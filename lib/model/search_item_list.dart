@@ -12,22 +12,13 @@ class SearchItemList<T> extends ValueNotifier {
   }
 
   ValueNotifier<List<Item?>> listItems = ValueNotifier<List<Item>>([]);
-  List<Item?>? get getListItems => listItems?.value ?? null;
+  List<Item?>? get getListItems => listItems.value;
   setListItem(Item item) {
-    if (item == null) {
-      return throw ('Search Item cannot be null or empty');
+    var itemsTemp = this.listItems.value.where((element) => element == item).toList();
+    if (itemsTemp.length > 0) {
+      this.listItems.value.remove(item);
     }
-
-    if (this.listItems == null) {
-      List<Item> list = [item];
-      this.listItems = ValueNotifier<List<Item>>(list);
-    } else {
-      var itemsTemp = this.listItems.value.where((element) => element == item).toList();
-      if (itemsTemp != null && itemsTemp.length > 0) {
-        this.listItems.value.remove(item);
-      }
-      this.listItems.value.add(item);
-    }
+    this.listItems.value.add(item);
 
     updateList();
   }

@@ -165,10 +165,10 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
     }
   }
 
-  Widget? _label(LabelSettings? settings, [String defaultValue = ""]) {
+  Widget? _label(LabelSettings? settings) {
     return settings != null
         ? Text(
-            settings.value ?? defaultValue,
+            settings.value,
             style: TextStyle(
               fontSize: settings.fontSize,
               fontWeight: settings.fontWeight,
@@ -184,7 +184,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
     Text? textLabel;
     Text? textLabelHide;
 
-    if (widget.searchResultSettings?.label != null) {
+    if (widget.searchResultSettings.label != null) {
       textLabel = _label(widget.searchResultSettings.label) as Text?;
 
       textLabelHide = Text(
@@ -223,7 +223,6 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                 child: InkWell(
                   onTap: () async {
                     if ((_controller == null ||
-                            _controller!.listItems == null ||
                             _controller!.listItems.getListItems == null ||
                             _controller!.listItems.getListItems!.length == 0) &&
                         widget.onSearch == null) {
@@ -236,7 +235,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                         duration: Duration(milliseconds: 1500),
                       );
 
-                      Scaffold.of(context).showSnackBar(snackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
                       _controller!.filter = '';
                       final result = await Navigator.push(
@@ -255,9 +254,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                       if (result != null) {
                         _controller!.listItems.updateList();
                         var itemsTemp = (result as SearchItem);
-                        if (itemsTemp == null ||
-                            itemsTemp.listItems == null ||
-                            itemsTemp.listItems.getListItems!.length == 0) {
+                        if (itemsTemp.listItems.getListItems!.length == 0) {
                           print('No items were selected');
                           _controller!.clear();
                         } else {
@@ -301,7 +298,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                                         searchItem: _controller!,
                                       ),
                                     )
-                                  : _label(widget.searchResultSettings.labelHint, "search...") ?? Container();
+                                  : _label(widget.searchResultSettings.labelHint) ?? Container();
                             },
                           ),
                         ),
@@ -313,7 +310,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
               ),
             ),
             if (widget.searchResultSettings.label?.value != null &&
-                widget.searchResultSettings.label?.value?.isNotEmpty == true)
+                widget.searchResultSettings.label?.value.isNotEmpty == true)
               Positioned(
                 left: 20,
                 top: 9.5,
@@ -330,7 +327,7 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
                 ),
               ),
             if (widget.searchResultSettings.label?.value != null &&
-                widget.searchResultSettings.label?.value?.isNotEmpty == true)
+                widget.searchResultSettings.label?.value.isNotEmpty == true)
               Positioned(
                 left: 25,
                 child: ClipRRect(
@@ -464,15 +461,15 @@ class _EasySearchState<T> extends State<EasySearch<T>> {
     _controller!.filterValue.value = _oldController.filterValue.value;
     _controller!.itemValue = _oldController.itemValue;
 
-    _oldController.listItems?.getListItems?.forEach(
+    _oldController.listItems.getListItems?.forEach(
       (element) => listTemp.add(
         Item(element!.itemValue!.value, element.selectedValue.value),
       ),
     );
 
-    _controller!.listItems?.listItems?.value?.clear();
+    _controller!.listItems.listItems.value.clear();
 
-    listTemp?.forEach(
+    listTemp.forEach(
       (element) => _controller!.listItems.listItems.value.add(
         Item(element.itemValue!.value, element.selectedValue.value),
       ),

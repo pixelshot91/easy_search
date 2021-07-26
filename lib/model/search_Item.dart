@@ -9,9 +9,9 @@ class SearchItem<T> {
   }
 
   ValueNotifier<String?> filterValue = ValueNotifier<String?>('');
-  String? get filter => filterValue?.value ?? null;
+  String? get filter => filterValue.value ?? null;
   set filter(String? filter) {
-    if (this.filterValue == null || this.filterValue.value == null) {
+    if (this.filterValue.value == null) {
       ValueNotifier<String>('');
     }
     this.filterValue.value = filter;
@@ -52,7 +52,7 @@ class SearchItem<T> {
     selectedItems = SearchItemList();
 
     var selectedList = getListItems!.where((element) => element!.selected).toList();
-    if (selectedList != null && selectedList.length > 0) {
+    if (selectedList.length > 0) {
       selectedItems.listItems.value.addAll(selectedList);
     }
 
@@ -60,25 +60,21 @@ class SearchItem<T> {
   }
 
   SearchItemList<T> listItems = SearchItemList();
-  List<Item?>? get getListItems => listItems?.getListItems;
+  List<Item?>? get getListItems => listItems.getListItems;
   ValueNotifier<int> countSelectedValue = ValueNotifier<int>(0);
   int get countSelected => countSelectedValue.value = listItems.countSelected();
   updateCountSelected({int? value = 0}) {
-    if (countSelectedValue == null) {
-      countSelectedValue = ValueNotifier<int>(value ?? countSelected);
-    } else {
-      countSelectedValue.value = value ?? countSelected;
-    }
+    countSelectedValue.value = value ?? countSelected;
   }
 
   changingValues(List<Item> items) {
     clear();
-    items?.forEach(listItems.setListItem);
+    items.forEach(listItems.setListItem);
   }
 
   clear() {
     filter = '';
-    countSelectedValue?.value = 0;
+    countSelectedValue.value = 0;
     itemValue?.value = null;
     listItems.clear();
   }

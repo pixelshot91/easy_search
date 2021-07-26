@@ -2,24 +2,21 @@ import 'package:flutter/material.dart';
 
 class Item<T> {
   ValueNotifier<bool> selectedValue = ValueNotifier<bool>(false);
-  bool get selected => selectedValue?.value ?? false;
+  bool get selected => selectedValue.value;
   set selected(bool selected) {
-    this.selectedValue.value = selected ?? false;
+    this.selectedValue.value = selected;
   }
 
   ValueNotifier<bool> visibleValue = ValueNotifier<bool>(true);
-  bool get visible => visibleValue?.value ?? true;
+  bool get visible => visibleValue.value;
   set visible(bool visible) {
-    this.visibleValue.value = visible ?? true;
+    this.visibleValue.value = visible;
   }
 
-  ValueNotifier<bool> selectionHasBeenModifiedValue =
-      ValueNotifier<bool>(false);
-  bool get selectionHasBeenModified =>
-      selectionHasBeenModifiedValue?.value ?? false;
+  ValueNotifier<bool> selectionHasBeenModifiedValue = ValueNotifier<bool>(false);
+  bool get selectionHasBeenModified => selectionHasBeenModifiedValue.value;
   set selectionHasBeenModified(bool selectionHasBeenModified) {
-    this.selectionHasBeenModifiedValue.value =
-        selectionHasBeenModified ?? false;
+    this.selectionHasBeenModifiedValue.value = selectionHasBeenModified;
   }
 
   ValueNotifier<T>? itemValue;
