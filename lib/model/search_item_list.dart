@@ -12,7 +12,7 @@ class SearchItemList<T> extends ValueNotifier {
   }
 
   ValueNotifier<List<Item?>> listItems = ValueNotifier<List<Item>>([]);
-  List<Item?> get getListItems => listItems?.value ?? null;
+  List<Item?>? get getListItems => listItems?.value ?? null;
   setListItem(Item item) {
     if (item == null) {
       return throw ('Search Item cannot be null or empty');
@@ -22,8 +22,7 @@ class SearchItemList<T> extends ValueNotifier {
       List<Item> list = [item];
       this.listItems = ValueNotifier<List<Item>>(list);
     } else {
-      var itemsTemp =
-          this.listItems.value.where((element) => element == item).toList();
+      var itemsTemp = this.listItems.value.where((element) => element == item).toList();
       if (itemsTemp != null && itemsTemp.length > 0) {
         this.listItems.value.remove(item);
       }
@@ -66,8 +65,7 @@ class SearchItemList<T> extends ValueNotifier {
   }
 
   justOneSelected(Item item) {
-    getListItems.forEach((element) =>
-        element != item ? element!.selected = false : element!.selected = true);
+    getListItems!.forEach((element) => element != item ? element!.selected = false : element!.selected = true);
     updateList();
   }
 
@@ -77,7 +75,7 @@ class SearchItemList<T> extends ValueNotifier {
   ///[all == false] all items are unselected
   ///
   selectOrUselecteAll({bool all = true, bool? multipleSelect = false}) {
-    getListItems.forEach(
+    getListItems!.forEach(
       (element) {
         if (multipleSelect!) {
           //Select All == True
@@ -85,8 +83,7 @@ class SearchItemList<T> extends ValueNotifier {
             if ((element!.selectionHasBeenModified && element.selected) ||
                 (!element.selectionHasBeenModified && !element.selected)) {
               element.selectionHasBeenModified = true;
-            } else if ((!element.selectionHasBeenModified &&
-                    element.selected) ||
+            } else if ((!element.selectionHasBeenModified && element.selected) ||
                 (element.selectionHasBeenModified && !element.selected)) {
               element.selectionHasBeenModified = false;
             }
@@ -97,8 +94,7 @@ class SearchItemList<T> extends ValueNotifier {
             if ((element!.selectionHasBeenModified && element.selected) ||
                 (!element.selectionHasBeenModified && !element.selected)) {
               element.selectionHasBeenModified = false;
-            } else if ((!element.selectionHasBeenModified &&
-                    element.selected) ||
+            } else if ((!element.selectionHasBeenModified && element.selected) ||
                 (element.selectionHasBeenModified && !element.selected)) {
               element.selectionHasBeenModified = true;
             }
@@ -130,7 +126,7 @@ class SearchItemList<T> extends ValueNotifier {
       return throw ('The list cannot be null');
     }
 
-    if (this.getListItems.length == 0) {
+    if (this.getListItems!.length == 0) {
       return throw ('The list is already empty');
     }
 
@@ -142,9 +138,7 @@ class SearchItemList<T> extends ValueNotifier {
     if (getListItems == null) {
       return 0;
     }
-    return getListItems.length == 0
-        ? 0
-        : getListItems.where((element) => element!.selected).toList().length;
+    return getListItems!.length == 0 ? 0 : getListItems!.where((element) => element!.selected).toList().length;
   }
 
   clear() {

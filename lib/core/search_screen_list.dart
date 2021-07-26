@@ -25,12 +25,10 @@ class SearchScreenList<T> extends StatefulWidget {
     this.customItemBuilder,
   }) : super(key: key);
   @override
-  _SearchScreenListState<T> createState() =>
-      _SearchScreenListState<T>(controller: controller!);
+  _SearchScreenListState<T> createState() => _SearchScreenListState<T>(controller: controller!);
 }
 
-class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
-    with TickerProviderStateMixin {
+class _SearchScreenListState<T> extends State<SearchScreenList<T?>> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animationSelectAll;
   late Animation<double> _animationUnselectAll;
@@ -68,8 +66,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
 
     _animationController.reverse();
 
-    _waitingTimeToSearch =
-        widget.filterPageSettings?.waitingTimeToSearch ?? 1500;
+    _waitingTimeToSearch = widget.filterPageSettings?.waitingTimeToSearch ?? 1500;
 
     //After page load, to try run the search
     WidgetsBinding.instance!.addPostFrameCallback((_) => afeterPageLoad());
@@ -79,8 +76,8 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
 
   //After page load, to try run the search
   void afeterPageLoad() {
-    if (widget.filterPageSettings!.searchOnShow != null &&
-        widget.filterPageSettings!.searchOnShow == true) _tryToRunTheSearch();
+    if (widget.filterPageSettings!.searchOnShow != null && widget.filterPageSettings!.searchOnShow == true)
+      _tryToRunTheSearch();
   }
 
   @override
@@ -105,8 +102,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
               Column(
                 children: [
                   Padding(
-                    padding:
-                        widget.filterPageSettings!.padding, //General Padding
+                    padding: widget.filterPageSettings!.padding, //General Padding
                     child: Row(
                       children: [
                         //TextField Search
@@ -142,11 +138,8 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
                         ? buildProgress(context)
                         : (widget.controller == null ||
                                 widget.controller!.listItems == null ||
-                                widget.controller!.listItems.getListItems ==
-                                    null ||
-                                widget.controller!.listItems.getListItems
-                                        .length ==
-                                    0)
+                                widget.controller!.listItems.getListItems == null ||
+                                widget.controller!.listItems.getListItems!.length == 0)
                             ? buildMessageNotFound(context)
                             : buildListItems();
                   },
@@ -194,8 +187,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
         widget.filterPageSettings!.title.value,
         style: TextStyle(
           color: widget.filterPageSettings!.title.color == null
-              ? Colors.white
-                  .withOpacity(widget.filterPageSettings!.title.colorOpacity)
+              ? Colors.white.withOpacity(widget.filterPageSettings!.title.colorOpacity)
               : widget.filterPageSettings!.title.color?.withOpacity(
                   widget.filterPageSettings!.title.colorOpacity,
                 ),
@@ -221,15 +213,11 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
         widget.controller!.filter = value;
       },
       style: TextStyle(
-        fontSize:
-            widget.filterPageSettings!.filterField.styleSearchValue.fontSize,
+        fontSize: widget.filterPageSettings!.filterField.styleSearchValue.fontSize,
         color: widget.filterPageSettings!.filterField.styleSearchValue.color!
-            .withOpacity(widget
-                .filterPageSettings!.filterField.styleSearchValue.colorOpacity),
-        fontWeight:
-            widget.filterPageSettings!.filterField.styleSearchValue.fontWeight,
-        letterSpacing: widget
-            .filterPageSettings!.filterField.styleSearchValue.letterSpacing,
+            .withOpacity(widget.filterPageSettings!.filterField.styleSearchValue.colorOpacity),
+        fontWeight: widget.filterPageSettings!.filterField.styleSearchValue.fontWeight,
+        letterSpacing: widget.filterPageSettings!.filterField.styleSearchValue.letterSpacing,
       ),
       autofocus: true,
       autocorrect: false,
@@ -244,28 +232,22 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
         hintStyle: TextStyle(
             fontSize: widget.filterPageSettings!.filterField.labelHint.fontSize,
             color: widget.filterPageSettings!.filterField.labelHint.color!
-                .withOpacity(widget
-                    .filterPageSettings!.filterField.labelHint.colorOpacity),
-            letterSpacing:
-                widget.filterPageSettings!.filterField.labelHint.letterSpacing,
-            fontWeight:
-                widget.filterPageSettings!.filterField.labelHint.fontWeight),
+                .withOpacity(widget.filterPageSettings!.filterField.labelHint.colorOpacity),
+            letterSpacing: widget.filterPageSettings!.filterField.labelHint.letterSpacing,
+            fontWeight: widget.filterPageSettings!.filterField.labelHint.fontWeight),
         hintText: widget.filterPageSettings!.filterField.labelHint.value,
         prefixIcon: widget.filterPageSettings!.filterField.prefixIcon,
-        suffixIcon: widget.controller != null &&
-                widget.controller!.filterValue != null
+        suffixIcon: widget.controller != null && widget.controller!.filterValue != null
             ? ValueListenableBuilder(
-                valueListenable: widget.controller?.filterValue,
+                valueListenable: widget.controller!.filterValue,
                 builder: (_, dynamic __, ___) {
-                  return widget.controller!.filter == null ||
-                          widget.controller!.filter!.length == 0
+                  return widget.controller!.filter == null || widget.controller!.filter!.length == 0
                       ? Container(
                           width: 0,
                           color: Colors.transparent,
                         )
                       : Padding(
-                          padding: widget.filterPageSettings!.filterField
-                              .sufixCircularPadding,
+                          padding: widget.filterPageSettings!.filterField.sufixCircularPadding,
                           child: Container(
                             height: 5,
                             width: 5,
@@ -277,20 +259,15 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
                                 );
                                 FocusScope.of(context).unfocus();
                               },
-                              color: widget.filterPageSettings!.filterField
-                                  .suffixIconBackground
-                                  .withOpacity(widget.filterPageSettings!
-                                      .filterField.suffixIconBackgroundOpacity),
+                              color: widget.filterPageSettings!.filterField.suffixIconBackground
+                                  .withOpacity(widget.filterPageSettings!.filterField.suffixIconBackgroundOpacity),
                               child: Icon(
-                                widget.filterPageSettings!.filterField.suffixIcon
-                                    .icon,
-                                size: widget.filterPageSettings!.filterField
-                                    .suffixIcon.size,
-                                color: widget.filterPageSettings!.filterField
-                                    .suffixIcon.color,
+                                widget.filterPageSettings!.filterField.suffixIcon.icon,
+                                size: widget.filterPageSettings!.filterField.suffixIcon.size,
+                                color: widget.filterPageSettings!.filterField.suffixIcon.color,
                               ),
-                              padding: widget.filterPageSettings!.filterField
-                                  .sufixIconCircularPadding, //Clear X Padding
+                              padding:
+                                  widget.filterPageSettings!.filterField.sufixIconCircularPadding, //Clear X Padding
                               shape: CircleBorder(),
                             ),
                           ),
@@ -317,33 +294,19 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
   Widget buildFlatButtonCancel(BuildContext context) {
     return FlatButton(
       child: Text(
-        widget.filterPageSettings!.filterField.labelCancelFilterSearch.value ==
-                    null ||
-                widget.filterPageSettings!.filterField.labelCancelFilterSearch
-                        .value
-                        .replaceAll(' ', '')
-                        .length ==
-                    0
+        widget.filterPageSettings!.filterField.labelCancelFilterSearch.value == null ||
+                widget.filterPageSettings!.filterField.labelCancelFilterSearch.value.replaceAll(' ', '').length == 0
             ? 'Cancel'
-            : widget
-                .filterPageSettings!.filterField.labelCancelFilterSearch.value,
+            : widget.filterPageSettings!.filterField.labelCancelFilterSearch.value,
         style: TextStyle(
-          color: widget.filterPageSettings!.filterField.labelCancelFilterSearch
-                      .color !=
-                  null
-              ? widget
-                  .filterPageSettings!.filterField.labelCancelFilterSearch.color!
-                  .withOpacity(widget.filterPageSettings!.filterField
-                      .labelCancelFilterSearch.colorOpacity)
-              : Theme.of(context).primaryColor.withOpacity(widget
-                  .filterPageSettings!
-                  .filterField
-                  .labelCancelFilterSearch
-                  .colorOpacity),
-          fontWeight: widget.filterPageSettings!.filterField
-              .labelCancelFilterSearch.fontWeight,
-          fontSize: widget
-              .filterPageSettings!.filterField.labelCancelFilterSearch.fontSize,
+          color: widget.filterPageSettings!.filterField.labelCancelFilterSearch.color != null
+              ? widget.filterPageSettings!.filterField.labelCancelFilterSearch.color!
+                  .withOpacity(widget.filterPageSettings!.filterField.labelCancelFilterSearch.colorOpacity)
+              : Theme.of(context)
+                  .primaryColor
+                  .withOpacity(widget.filterPageSettings!.filterField.labelCancelFilterSearch.colorOpacity),
+          fontWeight: widget.filterPageSettings!.filterField.labelCancelFilterSearch.fontWeight,
+          fontSize: widget.filterPageSettings!.filterField.labelCancelFilterSearch.fontSize,
         ),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
@@ -358,8 +321,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
   Widget buildDividerBetweenFilterAndList(BuildContext context) {
     return Container(
       color: widget.filterPageSettings!.filterField.dividerFilterAndList.color
-          .withOpacity(widget
-              .filterPageSettings!.filterField.dividerFilterAndList.opacity),
+          .withOpacity(widget.filterPageSettings!.filterField.dividerFilterAndList.opacity),
       height: widget.filterPageSettings!.filterField.dividerFilterAndList.size,
       width: MediaQuery.of(context).size.width,
     );
@@ -370,10 +332,9 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
     return Container(
       child: Center(
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color?>(
-              widget.filterPageSettings!.listFilter.circularProgress != null
-                  ? widget.filterPageSettings!.listFilter.circularProgress
-                  : Theme.of(context).primaryColor),
+          valueColor: AlwaysStoppedAnimation<Color?>(widget.filterPageSettings!.listFilter.circularProgress != null
+              ? widget.filterPageSettings!.listFilter.circularProgress
+              : Theme.of(context).primaryColor),
         ),
       ),
     );
@@ -386,23 +347,15 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
         child: Text(
           widget.filterPageSettings!.listFilter.valueNotFoundAlert.value,
           style: TextStyle(
-            color: widget.filterPageSettings!.listFilter.valueNotFoundAlert
-                        .color !=
-                    null
+            color: widget.filterPageSettings!.listFilter.valueNotFoundAlert.color != null
                 ? widget.filterPageSettings!.listFilter.valueNotFoundAlert.color!
-                    .withOpacity(widget.filterPageSettings!.listFilter
-                        .valueNotFoundAlert.colorOpacity)
-                : Theme.of(context).primaryColor.withOpacity(widget
-                    .filterPageSettings!
-                    .listFilter
-                    .valueNotFoundAlert
-                    .colorOpacity),
-            fontSize: widget
-                .filterPageSettings!.listFilter.valueNotFoundAlert.fontSize,
-            letterSpacing: widget
-                .filterPageSettings!.listFilter.valueNotFoundAlert.letterSpacing,
-            fontWeight: widget
-                .filterPageSettings!.listFilter.valueNotFoundAlert.fontWeight,
+                    .withOpacity(widget.filterPageSettings!.listFilter.valueNotFoundAlert.colorOpacity)
+                : Theme.of(context)
+                    .primaryColor
+                    .withOpacity(widget.filterPageSettings!.listFilter.valueNotFoundAlert.colorOpacity),
+            fontSize: widget.filterPageSettings!.listFilter.valueNotFoundAlert.fontSize,
+            letterSpacing: widget.filterPageSettings!.listFilter.valueNotFoundAlert.letterSpacing,
+            fontWeight: widget.filterPageSettings!.listFilter.valueNotFoundAlert.fontWeight,
           ),
         ),
       ),
@@ -411,35 +364,31 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
 
   //Build List Items
   ListView buildListItems() {
-    var source = widget.controller!.listItems.getListItems
-        .where((element) => element!.visible)
-        .toList();
+    var source = widget.controller!.listItems.getListItems!.where((element) => element!.visible).toList();
     return ListView.builder(
       itemCount: source.length,
       itemBuilder: (context, index) {
         var item = source[index];
         return widget.customItemBuilder != null
             ? InkWell(
-                child:
-                    widget.customItemBuilder!(context, item!.item, item.selected),
+                child: widget.customItemBuilder!(context, item!.item, item.selected),
                 onTap: () {
                   //OnTap Item
                   _onTapItem(item, context);
                 },
               )
             : Padding(
-                padding: widget.filterPageSettings!.buildItemFilter
-                    .padding, //General Item Selected Padding
+                padding: widget.filterPageSettings!.buildItemFilter.padding, //General Item Selected Padding
                 child: InkWell(
                   onTap: () {
                     //OnTap Item
                     _onTapItem(item!, context);
                   },
-                  borderRadius: BorderRadius.circular(widget.filterPageSettings!
-                      .buildItemFilter.circularBorderRadiusItem),
+                  borderRadius:
+                      BorderRadius.circular(widget.filterPageSettings!.buildItemFilter.circularBorderRadiusItem),
                   child: Padding(
-                    padding: widget.filterPageSettings!.buildItemFilter
-                        .spaceBetweenItems, //General Container Selected Padding
+                    padding: widget
+                        .filterPageSettings!.buildItemFilter.spaceBetweenItems, //General Container Selected Padding
                     child: buildItemDecoration(item!, context),
                   ),
                 ),
@@ -453,47 +402,34 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
     return Container(
       decoration: BoxDecoration(
         color: item.selected
-            ? widget.filterPageSettings!.buildItemFilter
-                        .backgroundSelectedItem !=
-                    null
-                ? widget
-                    .filterPageSettings!.buildItemFilter.backgroundSelectedItem!
-                    .withOpacity(widget.filterPageSettings!.buildItemFilter
-                        .backgroundSelectedItemOpacity)
-                : Theme.of(context).primaryColor.withOpacity(widget
-                    .filterPageSettings!
-                    .buildItemFilter
-                    .backgroundSelectedItemOpacity)
+            ? widget.filterPageSettings!.buildItemFilter.backgroundSelectedItem != null
+                ? widget.filterPageSettings!.buildItemFilter.backgroundSelectedItem!
+                    .withOpacity(widget.filterPageSettings!.buildItemFilter.backgroundSelectedItemOpacity)
+                : Theme.of(context)
+                    .primaryColor
+                    .withOpacity(widget.filterPageSettings!.buildItemFilter.backgroundSelectedItemOpacity)
             : Colors.transparent,
         border: Border.all(
             color: item.selected
-                ? widget.filterPageSettings!.buildItemFilter
-                            .borderSelectedItem !=
-                        null
-                    ? widget
-                        .filterPageSettings!.buildItemFilter.borderSelectedItem!
-                        .withOpacity(widget.filterPageSettings!.buildItemFilter
-                            .borderSelectedItemOpacity)
-                    : Theme.of(context).primaryColor.withOpacity(widget
-                        .filterPageSettings!
-                        .buildItemFilter
-                        .borderSelectedItemOpacity)
+                ? widget.filterPageSettings!.buildItemFilter.borderSelectedItem != null
+                    ? widget.filterPageSettings!.buildItemFilter.borderSelectedItem!
+                        .withOpacity(widget.filterPageSettings!.buildItemFilter.borderSelectedItemOpacity)
+                    : Theme.of(context)
+                        .primaryColor
+                        .withOpacity(widget.filterPageSettings!.buildItemFilter.borderSelectedItemOpacity)
                 : Colors.transparent,
             width: 0.0),
-        borderRadius: BorderRadius.circular(widget.filterPageSettings!
-            .buildItemFilter.circularBorderRadiusBackgroundItem),
+        borderRadius:
+            BorderRadius.circular(widget.filterPageSettings!.buildItemFilter.circularBorderRadiusBackgroundItem),
       ),
       child: Padding(
-        padding:
-            widget.filterPageSettings!.buildItemFilter.backgroundValuePadding,
+        padding: widget.filterPageSettings!.buildItemFilter.backgroundValuePadding,
         //Content Selected Padding
         child: Column(
-          crossAxisAlignment:
-              widget.filterPageSettings!.buildItemFilter.crossAxisAlignment,
+          crossAxisAlignment: widget.filterPageSettings!.buildItemFilter.crossAxisAlignment,
           children: [
             buildTextItemValue(item, context),
-            if (widget
-                .filterPageSettings!.buildItemFilter.hasAnimationOnSelectItem)
+            if (widget.filterPageSettings!.buildItemFilter.hasAnimationOnSelectItem)
               buildAnimatedContainerSelectedItem(item, context),
           ],
         ),
@@ -504,25 +440,20 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
   //Build Text ItemValue
   Widget buildTextItemValue(Item item, BuildContext context) {
     return Padding(
-      padding: widget.filterPageSettings!.buildItemFilter
-          .valuePadding, //Text Selected Padding
+      padding: widget.filterPageSettings!.buildItemFilter.valuePadding, //Text Selected Padding
       child: Text(
         item.item.toString(),
         style: TextStyle(
             color: item.selected
                 ? widget.filterPageSettings!.buildItemFilter.itemValue.color != null
                     ? widget.filterPageSettings!.buildItemFilter.itemValue.color!
-                        .withOpacity(widget.filterPageSettings!.buildItemFilter
-                            .itemValue.colorOpacity)
-                    : Theme.of(context).primaryColor.withOpacity(widget
-                        .filterPageSettings!
-                        .buildItemFilter
-                        .itemValue
-                        .colorOpacity)
+                        .withOpacity(widget.filterPageSettings!.buildItemFilter.itemValue.colorOpacity)
+                    : Theme.of(context)
+                        .primaryColor
+                        .withOpacity(widget.filterPageSettings!.buildItemFilter.itemValue.colorOpacity)
                 : null,
             fontWeight: item.selected
-                ? widget.filterPageSettings!.buildItemFilter.itemValue.fontWeight !=
-                        null
+                ? widget.filterPageSettings!.buildItemFilter.itemValue.fontWeight != null
                     ? widget.filterPageSettings!.buildItemFilter.itemValue.fontWeight
                     : FontWeight.w500
                 : FontWeight.normal,
@@ -534,48 +465,29 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
   //Build AnimatedContainer SelectedItem
   Widget buildAnimatedContainerSelectedItem(Item item, BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(
-          milliseconds: widget.filterPageSettings!.buildItemFilter
-              .animationDurationMilliseconds),
-      height: item.selected
-          ? widget
-              .filterPageSettings!.buildItemFilter.increaseHeightWhenAnimating
-          : 0.0,
-      curve:
-          setCurveAnimation(widget.filterPageSettings!.buildItemFilter.curves),
+      duration: Duration(milliseconds: widget.filterPageSettings!.buildItemFilter.animationDurationMilliseconds),
+      height: item.selected ? widget.filterPageSettings!.buildItemFilter.increaseHeightWhenAnimating : 0.0,
+      curve: setCurveAnimation(widget.filterPageSettings!.buildItemFilter.curves),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           AnimatedContainer(
-            duration: Duration(
-                milliseconds: widget.filterPageSettings!.buildItemFilter
-                        .animationDurationMilliseconds +
-                    200),
+            duration:
+                Duration(milliseconds: widget.filterPageSettings!.buildItemFilter.animationDurationMilliseconds + 200),
             curve: Curves.fastOutSlowIn,
-            alignment: item.selected
-                ? Alignment.center
-                : AlignmentDirectional.bottomCenter,
+            alignment: item.selected ? Alignment.center : AlignmentDirectional.bottomCenter,
             child: AnimatedContainer(
               duration: Duration(
-                  milliseconds: widget.filterPageSettings!.buildItemFilter
-                          .animationDurationMilliseconds +
-                      200),
+                  milliseconds: widget.filterPageSettings!.buildItemFilter.animationDurationMilliseconds + 200),
               width: setAnimatedWidth(context),
               curve: Curves.fastOutSlowIn,
-              alignment:
-                  item.selected ? Alignment.bottomRight : Alignment.bottomLeft,
+              alignment: item.selected ? Alignment.bottomRight : Alignment.bottomLeft,
               child: Icon(
                 widget.filterPageSettings!.buildItemFilter.iconAnimation.icon,
-                color: widget.filterPageSettings!.buildItemFilter.iconAnimation
-                            .color !=
-                        null
-                    ? widget
-                        .filterPageSettings!.buildItemFilter.iconAnimation.color
+                color: widget.filterPageSettings!.buildItemFilter.iconAnimation.color != null
+                    ? widget.filterPageSettings!.buildItemFilter.iconAnimation.color
                     : Theme.of(context).primaryColor,
-                size: item.selected
-                    ? widget
-                        .filterPageSettings!.buildItemFilter.iconAnimation.size
-                    : 0,
+                size: item.selected ? widget.filterPageSettings!.buildItemFilter.iconAnimation.size : 0,
               ),
             ),
           ),
@@ -590,21 +502,18 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
       scale: _animationUnselectAll,
       alignment: FractionalOffset.center,
       child: Material(
-        color: widget.filterPageSettings!.unselectedAll.background.withOpacity(
-            widget.filterPageSettings!.unselectedAll.backgroundOpacity),
+        color: widget.filterPageSettings!.unselectedAll.background
+            .withOpacity(widget.filterPageSettings!.unselectedAll.backgroundOpacity),
         //elevation: 5.0,
-        borderRadius: BorderRadius.circular(
-            widget.filterPageSettings!.unselectedAll.borderRadius),
+        borderRadius: BorderRadius.circular(widget.filterPageSettings!.unselectedAll.borderRadius),
         child: Container(
           width: 45.0,
           height: 45.0,
           decoration: BoxDecoration(
             border: Border.all(
                 color: widget.filterPageSettings!.unselectedAll.border!
-                    .withOpacity(
-                        widget.filterPageSettings!.unselectedAll.borderOpacity)),
-            borderRadius: BorderRadius.circular(
-                widget.filterPageSettings!.unselectedAll.borderRadius),
+                    .withOpacity(widget.filterPageSettings!.unselectedAll.borderOpacity)),
+            borderRadius: BorderRadius.circular(widget.filterPageSettings!.unselectedAll.borderRadius),
           ),
           child: InkWell(
             onTap: () {
@@ -612,33 +521,26 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
                 _longPressSelectItems = false;
                 _showMoreActions();
                 print("Unselect All has been pressed");
-                if (widget.controller!.getListItems.length > 0) {
-                  widget.controller!.listItems.selectOrUselecteAll(
-                      all: false, multipleSelect: widget.multipleSelect);
+                if (widget.controller!.getListItems!.length > 0) {
+                  widget.controller!.listItems.selectOrUselecteAll(all: false, multipleSelect: widget.multipleSelect);
                   //widget.controller.getListItems.forEach((element) => element.selected = false);
                   //widget.controller.listItems.updateList();
                 }
               }
             },
-            borderRadius: BorderRadius.circular(
-                widget.filterPageSettings!.unselectedAll.borderRadius),
+            borderRadius: BorderRadius.circular(widget.filterPageSettings!.unselectedAll.borderRadius),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 widget.filterPageSettings!.unselectedAll.icon != null
                     ? Icon(
-                        widget.filterPageSettings!.unselectedAll.icon.icon !=
-                                null
+                        widget.filterPageSettings!.unselectedAll.icon.icon != null
                             ? widget.filterPageSettings!.unselectedAll.icon.icon
                             : Icons.clear_all,
-                        color: widget.filterPageSettings!.unselectedAll.icon
-                                    .color !=
-                                null
+                        color: widget.filterPageSettings!.unselectedAll.icon.color != null
                             ? widget.filterPageSettings!.unselectedAll.icon.color
                             : Colors.white,
-                        size: widget.filterPageSettings!.unselectedAll.icon
-                                    .size !=
-                                null
+                        size: widget.filterPageSettings!.unselectedAll.icon.size != null
                             ? widget.filterPageSettings!.unselectedAll.icon.size
                             : 25)
                     : Icon(
@@ -660,21 +562,19 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
       scale: _animationSelectAll,
       alignment: FractionalOffset.center,
       child: Material(
-        color: widget.filterPageSettings!.selectedAll.background.withOpacity(
-            widget.filterPageSettings!.selectedAll.backgroundOpacity),
+        color: widget.filterPageSettings!.selectedAll.background
+            .withOpacity(widget.filterPageSettings!.selectedAll.backgroundOpacity),
 
         //elevation: 5.0,
-        borderRadius: BorderRadius.circular(
-            widget.filterPageSettings!.selectedAll.borderRadius),
+        borderRadius: BorderRadius.circular(widget.filterPageSettings!.selectedAll.borderRadius),
         child: Container(
           width: 45.0,
           height: 45.0,
           decoration: BoxDecoration(
             border: Border.all(
-                color: widget.filterPageSettings!.selectedAll.border!.withOpacity(
-                    widget.filterPageSettings!.selectedAll.borderOpacity)),
-            borderRadius: BorderRadius.circular(
-                widget.filterPageSettings!.selectedAll.borderRadius),
+                color: widget.filterPageSettings!.selectedAll.border!
+                    .withOpacity(widget.filterPageSettings!.selectedAll.borderOpacity)),
+            borderRadius: BorderRadius.circular(widget.filterPageSettings!.selectedAll.borderRadius),
           ),
           child: InkWell(
             onTap: () {
@@ -682,16 +582,14 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
                 _longPressSelectItems = false;
                 _showMoreActions();
                 print("Select All has been pressed");
-                if (widget.controller!.getListItems.length > 0) {
-                  widget.controller!.listItems.selectOrUselecteAll(
-                      all: true, multipleSelect: widget.multipleSelect);
+                if (widget.controller!.getListItems!.length > 0) {
+                  widget.controller!.listItems.selectOrUselecteAll(all: true, multipleSelect: widget.multipleSelect);
                   // widget.controller.getListItems.forEach((element) => element.selected = true);
                   // widget.controller.listItems.updateList();
                 }
               }
             },
-            borderRadius: BorderRadius.circular(
-                widget.filterPageSettings!.selectedAll.borderRadius),
+            borderRadius: BorderRadius.circular(widget.filterPageSettings!.selectedAll.borderRadius),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -700,13 +598,10 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
                         widget.filterPageSettings!.selectedAll.icon.icon != null
                             ? widget.filterPageSettings!.selectedAll.icon.icon
                             : Icons.done_all,
-                        color: widget.filterPageSettings!.selectedAll.icon
-                                    .color !=
-                                null
+                        color: widget.filterPageSettings!.selectedAll.icon.color != null
                             ? widget.filterPageSettings!.selectedAll.icon.color
                             : Colors.white,
-                        size: widget.filterPageSettings!.selectedAll.icon.size !=
-                                null
+                        size: widget.filterPageSettings!.selectedAll.icon.size != null
                             ? widget.filterPageSettings!.selectedAll.icon.size
                             : 25)
                     : Icon(
@@ -737,23 +632,21 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
         child: Material(
           color: widget.filterPageSettings!.selectedButton.background,
           clipBehavior: Clip.antiAlias,
-          borderRadius: BorderRadius.circular(
-              widget.filterPageSettings!.selectedButton.borderRadius),
+          borderRadius: BorderRadius.circular(widget.filterPageSettings!.selectedButton.borderRadius),
           child: InkWell(
             onTap: () => _pop(context: context),
             child: Container(
               height: 50,
               decoration: BoxDecoration(
                 color: Colors.transparent,
-                borderRadius: BorderRadius.circular(
-                    widget.filterPageSettings!.selectedButton.borderRadius),
+                borderRadius: BorderRadius.circular(widget.filterPageSettings!.selectedButton.borderRadius),
                 border: widget.filterPageSettings!.selectedButton.border != null
                     ? widget.filterPageSettings!.selectedButton.border!
-                        .withOpacity(widget
-                            .filterPageSettings!.selectedButton.borderOpacity) as BoxBorder?
+                        .withOpacity(widget.filterPageSettings!.selectedButton.borderOpacity) as BoxBorder?
                     : Border.all(
-                        color: Theme.of(context).primaryColor.withOpacity(widget
-                            .filterPageSettings!.selectedButton.borderOpacity),
+                        color: Theme.of(context)
+                            .primaryColor
+                            .withOpacity(widget.filterPageSettings!.selectedButton.borderOpacity),
                       ),
               ),
               child: Column(
@@ -761,9 +654,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
                   Container(
                     height: 15,
                     child: Icon(
-                      _longPressSelectItems
-                          ? Icons.expand_more
-                          : Icons.expand_less,
+                      _longPressSelectItems ? Icons.expand_more : Icons.expand_less,
                       size: 15,
                     ),
                   ),
@@ -772,59 +663,37 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
                     alignment: WrapAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 5.0, top: 5.0), //Text Selected Button Padding
+                        padding: const EdgeInsets.only(left: 5.0, top: 5.0), //Text Selected Button Padding
                         child: Text(
                           '${widget.controller!.countSelected} ${widget.filterPageSettings!.selectedButton.textValue!.value != null ? widget.filterPageSettings!.selectedButton.textValue!.value : widget.controller!.countSelected > 1 ? 'items' : 'item'}',
-                          textAlign: widget.filterPageSettings!.selectedButton
-                              .textValue!.textAlign,
+                          textAlign: widget.filterPageSettings!.selectedButton.textValue!.textAlign,
                           style: TextStyle(
-                            color: widget.filterPageSettings!.selectedButton
-                                        .textValue!.color !=
-                                    null
-                                ? widget.filterPageSettings!.selectedButton
-                                    .textValue!.color!
-                                    .withOpacity(widget.filterPageSettings!
-                                        .selectedButton.textValue!.colorOpacity)
-                                : Theme.of(context).primaryColor.withOpacity(
-                                    widget.filterPageSettings!.selectedButton
-                                        .textValue!.colorOpacity),
-                            fontSize: widget.filterPageSettings!.selectedButton
-                                .textValue!.fontSize,
-                            letterSpacing: widget.filterPageSettings!
-                                .selectedButton.textValue!.letterSpacing,
-                            fontWeight: widget.filterPageSettings!.selectedButton
-                                .textValue!.fontWeight,
+                            color: widget.filterPageSettings!.selectedButton.textValue!.color != null
+                                ? widget.filterPageSettings!.selectedButton.textValue!.color!
+                                    .withOpacity(widget.filterPageSettings!.selectedButton.textValue!.colorOpacity)
+                                : Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(widget.filterPageSettings!.selectedButton.textValue!.colorOpacity),
+                            fontSize: widget.filterPageSettings!.selectedButton.textValue!.fontSize,
+                            letterSpacing: widget.filterPageSettings!.selectedButton.textValue!.letterSpacing,
+                            fontWeight: widget.filterPageSettings!.selectedButton.textValue!.fontWeight,
                           ),
                         ),
                       ),
                       Padding(
                         //Icon Selected Button Padding
-                        padding: const EdgeInsets.only(
-                            left: 0.0, top: 0.0, right: 5.0, bottom: 0.0),
-                        child: widget.filterPageSettings!.selectedButton.icon !=
-                                null
+                        padding: const EdgeInsets.only(left: 0.0, top: 0.0, right: 5.0, bottom: 0.0),
+                        child: widget.filterPageSettings!.selectedButton.icon != null
                             ? Icon(
-                                widget.filterPageSettings!.selectedButton.icon
-                                            .icon !=
-                                        null
-                                    ? widget.filterPageSettings!.selectedButton
-                                        .icon.icon
+                                widget.filterPageSettings!.selectedButton.icon.icon != null
+                                    ? widget.filterPageSettings!.selectedButton.icon.icon
                                     : Icons.check,
-                                size: widget.filterPageSettings!.selectedButton
-                                                .icon.size !=
-                                            null &&
-                                        widget.filterPageSettings!.selectedButton
-                                                .icon.size! >
-                                            0
-                                    ? widget.filterPageSettings!.selectedButton
-                                        .icon.size
+                                size: widget.filterPageSettings!.selectedButton.icon.size != null &&
+                                        widget.filterPageSettings!.selectedButton.icon.size! > 0
+                                    ? widget.filterPageSettings!.selectedButton.icon.size
                                     : 25,
-                                color: widget.filterPageSettings!.selectedButton
-                                            .icon.color !=
-                                        null
-                                    ? widget.filterPageSettings!.selectedButton
-                                        .icon.color
+                                color: widget.filterPageSettings!.selectedButton.icon.color != null
+                                    ? widget.filterPageSettings!.selectedButton.icon.color
                                     : Theme.of(context).primaryColor,
                               )
                             : Icon(
@@ -996,10 +865,8 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
             widget.filterPageSettings!.buildItemFilter.padding.right +
             widget.filterPageSettings!.buildItemFilter.spaceBetweenItems.left +
             widget.filterPageSettings!.buildItemFilter.spaceBetweenItems.right +
-            widget.filterPageSettings!.buildItemFilter.backgroundValuePadding
-                .left +
-            widget.filterPageSettings!.buildItemFilter.backgroundValuePadding
-                .right);
+            widget.filterPageSettings!.buildItemFilter.backgroundValuePadding.left +
+            widget.filterPageSettings!.buildItemFilter.backgroundValuePadding.right);
   }
 
   //When the Backbutton is touched
@@ -1019,16 +886,14 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
 
     if (widget.multipleSelect!) {
       //Start with false
-      item.selectionHasBeenModified =
-          item.selectionHasBeenModified ? false : true;
+      item.selectionHasBeenModified = item.selectionHasBeenModified ? false : true;
     }
 
     widget.controller!.item = item;
 
     if (!widget.multipleSelect!) {
       //Unselect all items
-      widget.controller!.listItems.selectOrUselecteAll(
-          all: false, multipleSelect: widget.multipleSelect);
+      widget.controller!.listItems.selectOrUselecteAll(all: false, multipleSelect: widget.multipleSelect);
 
       //Select just one item
       widget.controller!.listItems.justOneSelected(item);
@@ -1042,8 +907,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
   void cloneController(SearchItem controller) {
     _oldController.filterValue.value = controller.filterValue.value;
     _oldController.itemValue = controller.itemValue?.value != null
-        ? ValueNotifier<Item>(Item(controller.itemValue!.value!.item,
-            controller.itemValue!.value!.selected))
+        ? ValueNotifier<Item>(Item(controller.itemValue!.value!.item, controller.itemValue!.value!.selected))
         : ValueNotifier<Item?>(null);
 
     controller.listItems?.getListItems?.forEach(
@@ -1062,8 +926,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
       if (_enableSearch && (_searchTimer?.isActive ?? false)) {
         _searchTimer!.cancel();
       }
-      _searchTimer =
-          Timer(Duration(milliseconds: _waitingTimeToSearch), _doSearch);
+      _searchTimer = Timer(Duration(milliseconds: _waitingTimeToSearch), _doSearch);
     } else {
       _doSearch();
     }
@@ -1072,8 +935,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
   void _doSearch() {
     if (_enableSearch &&
         widget.controller!.filter != null &&
-        (widget.controller!.filter!.length > 0 ||
-            (widget.filterPageSettings?.searchOnEmpty ?? false))) {
+        (widget.controller!.filter!.length > 0 || (widget.filterPageSettings?.searchOnEmpty ?? false))) {
       try {
         if (_lastSearchValue.compareTo(widget.controller!.filter!) != 0) {
           _tryToRunTheSearch();
@@ -1114,18 +976,13 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
 
   //Execute Offline Search
   void executeOfflineSearch() {
-    if (_enableSearch &&
-        widget.controller!.filter != null &&
-        widget.controller!.filter!.length > 0) {
-      widget.controller!.getListItems
-          .where((element) => element!.item == widget.controller!.filter
-              ? element.visible = true
-              : element.visible = false)
+    if (_enableSearch && widget.controller!.filter != null && widget.controller!.filter!.length > 0) {
+      widget.controller!.getListItems!
+          .where((element) =>
+              element!.item == widget.controller!.filter ? element.visible = true : element.visible = false)
           .toList();
     } else {
-      widget.controller!.getListItems
-          .where((element) => element!.visible = true)
-          .toList();
+      widget.controller!.getListItems!.where((element) => element!.visible = true).toList();
       _lastSearchValue = DateTime.now().millisecondsSinceEpoch.toString();
     }
     widget.controller!.listItems.updateList();
@@ -1136,7 +993,7 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
     _enableSearch = false;
 
     //Reset to before values when cancel is touch
-    widget.controller!.getListItems.forEach(
+    widget.controller!.getListItems!.forEach(
       (element) {
         if (element!.selectionHasBeenModified && cancel) {
           element.selected = !element.selected;
@@ -1147,16 +1004,15 @@ class _SearchScreenListState<T> extends State<SearchScreenList<T?>>
     );
 
     if (widget.controller!.getSelectedItems != null &&
-        widget.controller!.getSelectedItems.getListItems.length < 1 &&
-        _oldController.getListItems.length > 0) {
+        widget.controller!.getSelectedItems!.getListItems!.length < 1 &&
+        _oldController.getListItems!.length > 0) {
       List<T?> oldItemList = [];
-      _oldController.getSelectedItems.getListItems.forEach(
+      _oldController.getSelectedItems!.getListItems!.forEach(
         (element) => oldItemList.add(element!.item),
       );
 
       if (oldItemList != null && oldItemList.length > 0) {
-        widget.controller!.listItems
-            .fillSelectedOldItemsFromCancel(items: oldItemList);
+        widget.controller!.listItems.fillSelectedOldItemsFromCancel(items: oldItemList);
       }
     }
 

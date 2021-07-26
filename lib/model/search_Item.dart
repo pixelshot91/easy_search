@@ -32,7 +32,7 @@ class SearchItem<T> {
 
     updateCountSelected(value: null);
 
-    listItems.getListItems.forEach((element) {
+    listItems.getListItems!.forEach((element) {
       if (element == this.itemValue!.value) {
         listItems.updateList();
         return;
@@ -41,20 +41,17 @@ class SearchItem<T> {
   }
 
   bool get hasSelection =>
-      getSelectedItems != null &&
-      selectedItems.getListItems != null &&
-      selectedItems.getListItems.length > 0;
+      getSelectedItems != null && selectedItems.getListItems != null && selectedItems.getListItems!.length > 0;
 
   SearchItemList<T> selectedItems = SearchItemList();
-  SearchItemList<T> get getSelectedItems {
+  SearchItemList<T>? get getSelectedItems {
     if (getListItems == null) {
       return null;
     }
 
     selectedItems = SearchItemList();
 
-    var selectedList =
-        getListItems.where((element) => element!.selected).toList();
+    var selectedList = getListItems!.where((element) => element!.selected).toList();
     if (selectedList != null && selectedList.length > 0) {
       selectedItems.listItems.value.addAll(selectedList);
     }
@@ -63,7 +60,7 @@ class SearchItem<T> {
   }
 
   SearchItemList<T> listItems = SearchItemList();
-  List<Item?> get getListItems => listItems?.getListItems;
+  List<Item?>? get getListItems => listItems?.getListItems;
   ValueNotifier<int> countSelectedValue = ValueNotifier<int>(0);
   int get countSelected => countSelectedValue.value = listItems.countSelected();
   updateCountSelected({int? value = 0}) {
