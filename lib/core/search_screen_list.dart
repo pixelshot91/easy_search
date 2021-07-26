@@ -28,7 +28,7 @@ class SearchScreenList<T> extends StatefulWidget {
   _SearchScreenListState<T> createState() => _SearchScreenListState<T>(controller: controller!);
 }
 
-class _SearchScreenListState<T> extends State<SearchScreenList<T?>> with TickerProviderStateMixin {
+class _SearchScreenListState<T> extends State<SearchScreenList<T>> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animationSelectAll;
   late Animation<double> _animationUnselectAll;
