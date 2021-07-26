@@ -141,7 +141,7 @@ class EasySearch<T> extends StatefulWidget {
   _EasySearchState<T> createState() => _EasySearchState<T>(controller: controller);
 }
 
-class _EasySearchState<T> extends State<EasySearch<T?>> {
+class _EasySearchState<T> extends State<EasySearch<T>> {
   SearchItem? _controller;
   double? _borderWidth;
   SearchItem _oldController = SearchItem(items: []);
@@ -353,7 +353,7 @@ class _EasySearchState<T> extends State<EasySearch<T?>> {
       return;
     }
 
-    List<T?>? onChangeValues;
+    List<T>? onChangeValues;
     if (_controller != null &&
         _controller!.getSelectedItems != null &&
         _controller!.getSelectedItems!.getListItems!.length > 0) {
